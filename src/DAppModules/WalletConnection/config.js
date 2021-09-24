@@ -4,8 +4,7 @@ import Integration from "../Web3/integration";
 import abi from "../Web3/ABI.json";
 
 let walletWeb3;
-function MetaMask(){
-  const dPetsContractAddress = "0x38250446B0cE0A34C84150ba8f0A12CEE4eDdF08";
+function MetaMask({children}){
   
   const [walletWeb3,setWallet] = useState()
   const [PetsContract,setPetsContract] = useState()
@@ -31,7 +30,8 @@ async function GetMetamask(){
 }
 
 return(
-  <div><Integration web3={walletWeb3} PetsContract={PetsContract}/></div>
+  <div><Integration web3={walletWeb3} PetsContract={PetsContract}/>
+    { children}</div>
   
 );
 }
