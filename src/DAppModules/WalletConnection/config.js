@@ -1,13 +1,32 @@
-import { ChainId, DAppProvider } from '@usedapp/core';
+import {useState,useEffect} from "react";
+import Web3 from "web3";
+import Integration from "../Web3/integration";
+let walletWeb3;
+function MetaMask(){
+  
+  const [walletWeb3,setWallet] = useState()
+    useEffect(async () => {
+      GetMetamask();
+      // console.log(walletWeb3.eth.currentProvider);
+      // console.log(walletWeb3.eth.getBalance(window.ethereum.selectedAddress));
+      }, [])
 
-const config = {
-    readOnlyChainId: ChainId.Mainnet,
-    readOnlyUrls: {
-        [ChainId.Mainnet]: 'https://mainnet.infura.io/v3/62687d1a985d4508b2b7a24827551934',
-    },
+
+async function GetMetamask(){
+  if(window.ethereum)
+        {
+        setWallet(new Web3(window.ethereum));
+        await window.ethereum.request({method:'eth_requestAccounts'});
+        }
+        else
+        {
+        console.log("Metamask wallet not avaiable");
+        }
 }
-export default function DAppProviderComponent({children}) {
-    return (<DAppProvider config={config}>
-        {children}
-</DAppProvider>)
+
+return(
+  <div><Integration web3={walletWeb3}/></div>
+  
+);
 }
+export default MetaMask;
