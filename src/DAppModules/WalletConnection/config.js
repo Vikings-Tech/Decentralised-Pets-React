@@ -5,7 +5,7 @@ import abi from "../Web3/ABI.json";
 
 let walletWeb3;
 function MetaMask({children}){
-  
+  const dPetsContractAddress = "0x38250446B0cE0A34C84150ba8f0A12CEE4eDdF08";
   const [walletWeb3,setWallet] = useState()
   const [PetsContract,setPetsContract] = useState()
     useEffect(async () => {
