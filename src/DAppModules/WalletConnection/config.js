@@ -2,7 +2,7 @@ import {useState,useEffect} from "react";
 import Web3 from "web3";
 import Integration from "../Web3/integration";
 let walletWeb3;
-function MetaMask(){
+function MetaMask({children}){
   
   const [walletWeb3,setWallet] = useState()
     useEffect(async () => {
@@ -25,7 +25,8 @@ async function GetMetamask(){
 }
 
 return(
-  <div><Integration web3={walletWeb3}/></div>
+  <div><Integration web3={walletWeb3} />
+    { children}</div>
   
 );
 }
