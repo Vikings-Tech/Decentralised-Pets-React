@@ -1,22 +1,28 @@
 import {useState,useEffect} from "react";
 import Web3 from "web3";
 import Integration from "../Web3/integration";
+import abi from "../Web3/ABI.json";
+
 let walletWeb3;
 function MetaMask(){
+  const dPetsContractAddress = "0x38250446B0cE0A34C84150ba8f0A12CEE4eDdF08";
   
   const [walletWeb3,setWallet] = useState()
+  const [PetsContract,setPetsContract] = useState()
     useEffect(async () => {
       GetMetamask();
-      // console.log(walletWeb3.eth.currentProvider);
-      // console.log(walletWeb3.eth.getBalance(window.ethereum.selectedAddress));
+      
       }, [])
 
 
 async function GetMetamask(){
   if(window.ethereum)
         {
-        setWallet(new Web3(window.ethereum));
+        let web3 = await new Web3(window.ethereum)
+        setWallet(web3);
         await window.ethereum.request({method:'eth_requestAccounts'});
+        setPetsContract(new web3.eth.Contract(abi,dPetsContractAddress));
+        console.log("HERE")
         }
         else
         {
@@ -25,7 +31,7 @@ async function GetMetamask(){
 }
 
 return(
-  <div><Integration web3={walletWeb3}/></div>
+  <div><Integration web3={walletWeb3} PetsContract={PetsContract}/></div>
   
 );
 }
