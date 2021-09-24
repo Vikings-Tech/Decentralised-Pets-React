@@ -5,6 +5,7 @@ import Web3 from "web3";
 const Integration = ({web3,PetsContract}) => {
 
     
+  
     
 
     async function checkWeb3(){
