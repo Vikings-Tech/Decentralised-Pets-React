@@ -53,7 +53,7 @@ const files = [
 export default function Pets() {
     return (
         <div className="container mx-auto pt-4 px-3">
-            <h1>My Pets</h1>
+            <h1>Store of Pets</h1>
             <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                 {files.map((file) => (
                     <li key={file.source} className="relative">

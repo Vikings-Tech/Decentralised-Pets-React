@@ -1,39 +1,35 @@
 import React from 'react'
 import {useState,useEffect} from "react";
 import Web3 from "web3";
+import { getWeb3, getPetsContract} from "../WalletConnection/config";
 
-const Integration = ({web3,PetsContract}) => {
-
-    
-  
-    
 
     async function checkWeb3(){
-        const balance = await web3.eth.getBalance(window.ethereum.selectedAddress);
+        const balance = await (await getWeb3()).eth.getBalance(window.ethereum.selectedAddress);
         console.log(balance);
     }
     
     async function userNFTCount(){
-        const result = await PetsContract.methods.balanceOf(window.ethereum.selectedAddress).call({from: window.ethereum.selectedAddress});
+        const result = await (await getPetsContract()).methods.balanceOf(window.ethereum.selectedAddress).call({from: window.ethereum.selectedAddress});
         console.log(result)
     }
 
     async function totalSupplyCount(){
-        const result = await PetsContract.methods.totalSupply().call({from: window.ethereum.selectedAddress});
+        const result = await (await getPetsContract()).methods.totalSupply().call({from: window.ethereum.selectedAddress});
         console.log(result)
     }
     
     async function ownerTokens(index){
-        const result = await PetsContract.methods.tokenOfOwnerByIndex(window.ethereum.selectedAddress,index).call({from: window.ethereum.selectedAddress});
+        const result = await (await getPetsContract()).methods.tokenOfOwnerByIndex(window.ethereum.selectedAddress,index).call({from: window.ethereum.selectedAddress});
         console.log(result)
     }
 
-    async function getPetDNA(index){
-        const result = await PetsContract.methods.getPetDNA(index).call({from: window.ethereum.selectedAddress});
+    async function getPetDNA(tokenId){
+        const result = await (await getPetsContract()).methods.getPetDNA(tokenId).call({from: window.ethereum.selectedAddress});
         console.log(result)
     }
     async function buyNewPet(){
-          const result = PetsContract.methods.buyNewPet().send({from: window.ethereum.selectedAddress,value:Math.pow(10,16)})
+          const result = (await getPetsContract()).methods.buyNewPet().send({from: window.ethereum.selectedAddress,value:Math.pow(10,16)})
           result.on("transactionHash",(hash)=>{
             console.log("Transaction sent successfully. Check console for Transaction hash")
             console.log("Transaction Hash is ",hash)
@@ -46,13 +42,9 @@ const Integration = ({web3,PetsContract}) => {
             }
             console.log(receipt)
           })
-        }
-    return (
+    }
         
-        <div>
-            <button type="button" className="button" onClick={totalSupplyCount}>Test</button> 
-        </div>
-    )
-}
 
-export default Integration
+
+
+export default {checkWeb3,buyNewPet}

@@ -7,10 +7,7 @@ import DAppProviderComponent from './DAppModules/WalletConnection/config';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DAppProviderComponent>
       <App />
-    </DAppProviderComponent>
-
   </React.StrictMode>,
   document.getElementById('root')
 );

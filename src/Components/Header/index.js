@@ -1,6 +1,7 @@
 import { Popover } from '@headlessui/react'
 import { useEthers, useEtherBalance } from "@usedapp/core";
 import { formatEther } from "@ethersproject/units";
+import { AuthenticateMetaMask } from '../../DAppModules/WalletConnection/config';
 
 
 export default function Header() {
@@ -35,7 +36,7 @@ export default function Header() {
                         <button
                             href="#"
                             className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                            onClick={() => activateBrowserWallet()}
+                            onClick={() => AuthenticateMetaMask()}
                         >
                             {account ? `${etherBalance && parseFloat(formatEther(etherBalance)).toFixed(3)} ETH`: "Connect to a wallet"}
                         </button>
