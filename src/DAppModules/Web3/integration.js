@@ -28,16 +28,18 @@ import { getWeb3, getPetsContract} from "../WalletConnection/config";
         const result = await (await getPetsContract()).methods.getPetDNA(tokenId).call({from: window.ethereum.selectedAddress});
         console.log(result)
     }
-    async function buyNewPet(){
+    async function buyNewPet(onSuccess, onFailure){
           const result = (await getPetsContract()).methods.buyNewPet().send({from: window.ethereum.selectedAddress,value:Math.pow(10,16)})
           result.on("transactionHash",(hash)=>{
             console.log("Transaction sent successfully. Check console for Transaction hash")
             console.log("Transaction Hash is ",hash)
           })
           .once("confirmation",(confirmationNumber,receipt)=>{
-            if(receipt.status){
+            if (receipt.status) {
+              onSuccess();
               console.log("Transaction processed successfully")
-            }else{
+            } else {
+              onFailure();
               console.log("Transaction failed");
             }
             console.log(receipt)

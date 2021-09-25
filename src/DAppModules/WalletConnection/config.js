@@ -25,7 +25,7 @@ export const getPetsContract = async() => {
   
 }
 export const SetPetsContractListener = (onSuccess, onFailure) => {
-  PetsContract?.events.PetSale({ fromBlock: 'latest', filter: { userAddress: window.ethereum.selectedAddress } })
+  (await getPetsContract()).events.PetSale({ fromBlock: 'latest', filter: { userAddress: window.ethereum.selectedAddress } })
     .on('data', event => {
       console.log(event)
       onSuccess();
