@@ -36,7 +36,7 @@ export async function getPetDNA(tokenId) {
 }
 export async function buyNewPet(onSuccess, onFailure) {
   console.log(await getPetsContract());
-  const result = (await getPetsContract()).methods.buyNewPet().send({ from: window.ethereum.selectedAddress, value: Math.pow(10, 16) })
+  const result = (await getPetsContract()).methods.buyNewPet().send({ from: window.ethereum.selectedAddress, value: Math.pow(10, 13) })
   result.on("transactionHash", (hash) => {
     console.log("Transaction sent successfully. Check console for Transaction hash")
     console.log("Transaction Hash is ", hash)

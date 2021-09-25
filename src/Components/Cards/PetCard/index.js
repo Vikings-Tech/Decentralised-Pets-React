@@ -1,22 +1,32 @@
 import React from "react";
+import QRCode from "react-qr-code";
 
-export default function PetCard () {
+export default function PetCard ({petObject}) {
     return (
-        <div className="p-10">
-            <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="/mountain.jpg" alt="Mountain">
-                <div className ="px-6 py-4">
-                <div className ="font-bold text-xl mb-2">Mountain</div>
-                <p className ="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.Voluptatibus quia, nulla!Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
+            <div className="my-8 mx-4">
+
+                <img src="https://source.unsplash.com/random/350x350" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md"/>
+
+                <div class ="relative px-4 -mt-16  ">
+                <div class ="bg-white p-6 rounded-lg shadow-lg">
+              
+
+                    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">Pet { petObject.id+1}</h4>
+
+                <div class ="mt-1">
+                        { petObject.pet}
+                        <span class="text-gray-600 text-sm">  </span>
                 </div>
-                <div className ="px-6 pt-4 pb-2">
-                <span className ="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                <span className ="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                <span className ="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                {/* <div class ="mt-4">
+                <span class ="text-teal-600 text-md font-semibold">4/5 ratings </span>
+                <span class ="text-sm text-gray-600">(based on 234 ratings)</span>
+                    </div> */}
+                    <QRCode value={petObject.pet} />
+
                 </div>
             </div>
-        </div>
+
+
+            </div>
     );
 }
