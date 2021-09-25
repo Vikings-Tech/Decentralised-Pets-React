@@ -25,11 +25,15 @@ export const getPetsContract = async() => {
   
 }
 export const SetPetsContractListener = async (onSuccess, onFailure) => {
-  (await getPetsContract()).events.PetSale({ fromBlock: 'latest', filter: { userAddress: window.ethereum.selectedAddress } })
-    .on('data', event => {
-      console.log(event)
-      onSuccess();
-    })
+  (await getPetsContract()).once('PetSale',{
+    filter:{userAddress: window.ethereum.selectedAddress},
+    fromBlock:'latest'
+  },function(error,event){console.log(event)});
+  // (await getPetsContract()).events.PetSale({ fromBlock: 'latest', filter: { userAddress: window.ethereum.selectedAddress } })
+  //   .on('data', event => {
+  //     console.log(event)
+  //     onSuccess();
+  //   })
 }
 export const AuthenticateMetaMask = async () => {
   if (window.ethereum) {
