@@ -6,13 +6,13 @@ import { PocketProvider } from "@usedapp/core/node_modules/@ethersproject/provid
 
 let walletWeb3, PetsContract;
 var MUMBAI_WSS = 'wss://rpc-mumbai.maticvigil.com/ws/v1/9a9736ed65423cc5678dd3653932d27facaf1e6b';
-var provider = new Web3.providers.WebsocketProvider(MUMBAI_WSS);
+var provider = new Web3(new Web3.providers.HttpProvider('https://rpc-mumbai.maticvigil.com/v1/9a9736ed65423cc5678dd3653932d27facaf1e6b'));;
 const dPetsContractAddress = "0x38250446B0cE0A34C84150ba8f0A12CEE4eDdF08";
 
 
 export const getWeb3 = async() => {
   if (!walletWeb3) {
-     walletWeb3 = await new Web3(provider);
+     walletWeb3 = await new Web3(window.ethereum);
   }
   return walletWeb3;
 
@@ -24,7 +24,7 @@ export const getPetsContract = async() => {
   return PetsContract;
   
 }
-export const SetPetsContractListener = (onSuccess, onFailure) => {
+export const SetPetsContractListener = async (onSuccess, onFailure) => {
   (await getPetsContract()).events.PetSale({ fromBlock: 'latest', filter: { userAddress: window.ethereum.selectedAddress } })
     .on('data', event => {
       console.log(event)
