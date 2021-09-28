@@ -9,7 +9,7 @@ import NewPet from "./Pages/NewPet"
 import Store from "./Pages/Store"
 function App() {
   return (
-    <>
+    <div className="background">
       <Router>
         <Header />
         <Switch>
@@ -29,7 +29,7 @@ function App() {
         </Switch>
       </Router>
 
-    </>
+    </div>
   );
 }
 
